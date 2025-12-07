@@ -183,32 +183,37 @@ async function removeGame(id) {
       <button v-if="me.is_admin" class="btn primary" @click="openCreate">Añadir juego</button>
     </template>
 
-    <!-- Anónima -->
-    <template v-else>
-      <button class="btn subtle" @click="showLogin = !showLogin">Inicio sesión</button>
-
-      <!-- Popover de login -->
-      <div v-if="showLogin" class="login-popover" @click.stop>
-        <div class="login-title">Inicio de sesión</div>
-        <input v-model="loginForm.username"
-              placeholder="Usuario"
-              class="input small"
-              name="username"
-              autocomplete="off" />
-        <input v-model="loginForm.password"
-              type="password"
-              placeholder="Contraseña"
-              class="input small"
-              name="current-password"
-              autocomplete="new-password" />
-        <div class="row">
-          <button class="btn" @click="showLogin=false">Cancelar</button>
-          <button class="btn primary" :disabled="loggingIn" @click="doLogin">Iniciar sesión</button>
-        </div>
-        <div v-if="errorMsg" class="error small">{{ errorMsg }}</div>
+  <!-- Anónima -->
+  <template v-else>
+    <button class="btn subtle" @click="showLogin = !showLogin">Inicio sesión</button>
+  
+    <!-- Popover de login -->
+    <div v-if="showLogin" class="login-popover" @click.stop>
+      <div class="login-title">Inicio de sesión</div>
+      <input
+        v-model="loginForm.username"
+        placeholder="Usuario"
+        class="input small"
+        name="username"
+        autocomplete="off"
+      />
+      <input
+        v-model="loginForm.password"
+        type="password"
+        placeholder="Contraseña"
+        class="input small"
+        name="adminpass"
+        autocomplete="off"
+        autocorrect="off"
+        spellcheck="false"
+      />
+      <div class="row">
+        <button class="btn" @click="showLogin=false">Cancelar</button>
+        <button class="btn primary" :disabled="loggingIn" @click="doLogin">Iniciar sesión</button>
       </div>
-    </template>
-  </div>
+      <div v-if="errorMsg" class="error small">{{ errorMsg }}</div>
+    </div>
+  </template>
 
 
   <div v-if="errorMsg" class="error">{{ errorMsg }}</div>

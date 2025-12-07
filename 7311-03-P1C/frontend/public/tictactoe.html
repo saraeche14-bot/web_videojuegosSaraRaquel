@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Tres en raya</title>
+  <style>
+    body { background:#0b0b0b; color:#fff; font-family: Arial, Helvetica, sans-serif; display:flex; align-items:center; justify-content:center; min-height:100vh; margin:0; }
+    #app { text-align:center; }
+    .board { display:grid; grid-template-columns: repeat(3, 100px); gap:10px; margin:20px auto; }
+    .cell { width:100px; height:100px; background:#222; border-radius:8px; display:flex; align-items:center; justify-content:center; font-size:48px; cursor:pointer; user-select:none; }
+    .cell:hover { background:#2b2b2b; }
+    .controls { margin-top:16px; }
+    button { padding:8px 12px; border-radius:6px; border:none; cursor:pointer; background:#ffc814; color:#000; }
+    .status { margin-top:8px; }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <h1>Tres en raya</h1>
+    <div class="board">
+      <div v-for="(cell, idx) in board" :key="idx" class="cell" @click="play(idx)">{{ cell }}</div>
+    </div>
+    <div class="status">{{ status }}</div>
+    <div class="controls">
+      <button @click="reset">Reiniciar</button>
+    </div>
+  </div>
+
+
+  <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
+  <script>
+    const { createApp, ref, computed } = Vue;
+    createApp({
+      setup() {
+        const board = ref(Array(9).fill(''));
+        const turn = ref('X');
+        const winner = ref(null);
+
+        function play(i) {
+          if (board.value[i] || winner.value) return;
+          board.value[i] = turn.value;
+          if (checkWin(turn.value)) {
+            winner.value = turn.value;
+          } else if (board.value.every(c => c)) {
+            winner.value = 'draw';
+          } else {
+            turn.value = turn.value === 'X' ? 'O' : 'X';
+          }
+        }
+
+        function checkWin(p) {
+          const b = board.value;
+          const lines = [
+            [0,1,2],[3,4,5],[6,7,8],
+            [0,3,6],[1,4,7],[2,5,8],
+            [0,4,8],[2,4,6]
+          ];
+          return lines.some(([a,bIdx,c]) => b[a] === p && b[bIdx] === p && b[c] === p);
+        }
+
+        function reset() {
+          board.value = Array(9).fill('');
+          turn.value = 'X';
+          winner.value = null;
+        }
+
+        const status = computed(() => {
+          if (winner.value === 'draw') return 'Empate';
+          if (winner.value) return 'Gana: ' + winner.value;
+          return 'Turno: ' + turn.value;
+        });
+
+        return { board, play, reset, status };
+      }
+    }).mount('#app');
+  </script>
+</body>
+</html>

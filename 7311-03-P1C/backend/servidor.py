@@ -43,8 +43,8 @@ os.makedirs(UPLOAD_DIR, exist_ok=True)
 app = Flask(__name__)
 app.config["SECRET_KEY"] = os.getenv("SECRET_KEY", "dev-secret-change-me")
 app.config["PERMANENT_SESSION_LIFETIME"] = timedelta(hours=2)
-app.config["SESSION_COOKIE_SAMESITE"] = "Lax"
-app.config["SESSION_COOKIE_SECURE"] = False  
+app.config["SESSION_COOKIE_SAMESITE"] = "None"
+app.config["SESSION_COOKIE_SECURE"] = True  # en Render todo va por HTTPS
 CORS(app, supports_credentials=True)
 
 
@@ -330,5 +330,6 @@ def uploaded_file(filename):
 
 if __name__ == "__main__":
     app.run(port=9000, debug=True)
+
 
 

@@ -48,7 +48,7 @@ app.config["SESSION_COOKIE_SECURE"] = False
 CORS(app, supports_credentials=True)
 
 
-ensure_database(DEFAULT_DSN)
+#ensure_database(DEFAULT_DSN)
 
 # ---------- BBDD ----------
 class DataBase:
@@ -323,3 +323,4 @@ def uploaded_file(filename):
 
 if __name__ == "__main__":
     app.run(port=9000, debug=True)
+

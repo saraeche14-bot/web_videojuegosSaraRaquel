@@ -50,6 +50,13 @@ CORS(app, supports_credentials=True)
 
 #ensure_database(DEFAULT_DSN)
 
+@app.route("/", methods=["GET"])
+def root():
+    return jsonify({
+        "message": "API de videojuegos funcionando",
+        "health_url": "/api/health"
+    })
+
 # ---------- BBDD ----------
 class DataBase:
     def __init__(self, dsn=None):
@@ -323,4 +330,5 @@ def uploaded_file(filename):
 
 if __name__ == "__main__":
     app.run(port=9000, debug=True)
+
 

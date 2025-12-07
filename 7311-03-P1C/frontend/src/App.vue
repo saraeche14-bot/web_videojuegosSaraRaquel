@@ -214,7 +214,7 @@ async function removeGame(id) {
       <div v-if="errorMsg" class="error small">{{ errorMsg }}</div>
     </div>
   </template>
-
+  </div>
 
   <div v-if="errorMsg" class="error">{{ errorMsg }}</div>
 

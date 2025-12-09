@@ -25,11 +25,6 @@ const yearError = ref(false);
 const selectedFile = ref(null); // archivo de imagen a subir opcional
 
 // ---------- Ayudas ----------
-const imageSrc = (g) => {
-  return g.image_path ? `${BASE}${g.image_path}` : 'https://via.placeholder.com/220x220?text=Sin+imagen';
-};
-
-
 // filtrar y ordenar
 const filteredGames = computed(() => {
   let result = games.value;

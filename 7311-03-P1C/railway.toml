@@ -1,2 +1,17 @@
+[build]
+builder = "NIXPACKS"
+buildCommand = "pip install -r 7311-03-P1C/backend/requirements.txt"
+watchPatterns = ["7311-03-P1C/backend/**/*.py", "7311-03-P1C/backend/requirements.txt"]
+root = "."
+
+[deploy]
+# Arrancamos *entrando* en la carpeta backend
+startCommand = "cd 7311-03-P1C/backend && gunicorn -b 0.0.0.0:$PORT servidor:app"
+
+[env]
+PYTHONUNBUFFERED = "1"
+PORT = "8080"
+
 [service]
-start = "cd 7311-03-P1C/backend && gunicorn -b 0.0.0.0:$PORT servidor:app"
+# Lo mismo aquí, por si Railway usa esta clave
+start = "cd 7311-03-P1C/backend && gunicorn -b 0.0.0.0:8080 servidor:app"

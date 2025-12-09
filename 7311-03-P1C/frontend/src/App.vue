@@ -53,6 +53,39 @@ const keywords = computed(() => {
   words.forEach(w => { count[w] = (count[w] || 0) + 1; });
   return Object.entries(count).filter(([w, c]) => c > 1).sort((a, b) => b[1] - a[1]).map(([w]) => w);
 });
+  
+// mapa de imágenes locales para los juegos "semilla"
+const localImages = {
+  'Among Us': '/img/Amongus.jpg',
+  'League of Legends': '/img/LeagueOfLegends.jpg',
+  'DOTA 2': '/img/Dota2.jpg',
+  'King of Glory': '/img/KingOfGlory.jpg',
+  'Fortnite': '/img/Fortnite.jpg',
+  'PUBG: Battlegrounds': '/img/Pubg.jpg',
+  'Counter-Strike 2': '/img/CounterStrike2.jpg',
+  'Valorant': '/img/Valorant.jpg',
+  'Call of Duty: Warzone 2.0': '/img/CallOfDutty.jpg',
+  'EA Sports FC 24': '/img/EASportsFC24.jpg',
+  'Minecraft': '/img/Minecraft.jpg',
+  'Tres en raya': '/img/TresEnRaya.jpg',
+};
+
+// función que decide qué imagen mostrar
+const imageSrc = (g) => {
+  // 1) si tenemos una imagen local para este nombre, usamos esa
+  if (g?.name && localImages[g.name]) {
+    return localImages[g.name];
+  }
+
+  // 2) si viene image_path desde la BBDD, usamos la del backend
+  if (g.image_path) {
+    return `${BASE}${g.image_path}`;
+  }
+
+  // 3) fallback por si acaso
+  return 'https://via.placeholder.com/220x220?text=Sin+imagen';
+};
+
 
 // ---------- Carga inicial ----------
 async function loadMe() {

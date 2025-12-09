@@ -62,7 +62,7 @@ const localImages = {
   'Call of Duty: Warzone 2.0': '/img/CallOfDutty.jpg',
   'EA Sports FC 24': '/img/EASportsFC24.jpg',
   'Minecraft': '/img/Minecraft.jpg',
-  'Tres en raya': '/img/TresEnRaya.jpg',
+  'Tres en raya': '/img/TresEnRaya.png',
 };
 
 // función que decide qué imagen mostrar

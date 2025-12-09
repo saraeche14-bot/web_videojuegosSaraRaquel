@@ -1,14 +1,2 @@
-[build]
-# Carpeta donde está tu servidor Flask y requirements.txt
-builder = "NIXPACKS"
-buildCommand = "pip install -r requirements.txt"
-watchPatterns = ["**/*.py", "requirements.txt"]
-root = "7311-03-P1C/backend"
-
-[deploy]
-# Comando para arrancar el servidor
-startCommand = "gunicorn -b 0.0.0.0:$PORT servidor:app"
-
-[env]
-PYTHONUNBUFFERED = "1"
-PORT = "8000"
+[service]
+start = "cd 7311-03-P1C/backend && gunicorn -b 0.0.0.0:$PORT servidor:app"

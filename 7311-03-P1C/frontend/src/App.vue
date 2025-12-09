@@ -51,7 +51,7 @@ const keywords = computed(() => {
   
 // mapa de imágenes locales para los juegos "semilla"
 const localImages = {
-  'Among Us': '/img/Amongus.jpg',
+  'Among Us': '/img/AmongUs.jpg',
   'League of Legends': '/img/LeagueOfLegends.jpg',
   'DOTA 2': '/img/Dota2.jpg',
   'King of Glory': '/img/KingOfGlory.jpg',
